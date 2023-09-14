@@ -1,0 +1,10 @@
+.header {
+  background: url(../../images/rlogo.svg) no-repeat center left;
+  padding-left: 80px;
+  /*padding-top: 3px;*/
+  font-family: 'Raleway Dots', cursive;
+  color: orange;
+  font-size: 80px;
+  width: 50%;
+  margin: 0 auto;
+}
