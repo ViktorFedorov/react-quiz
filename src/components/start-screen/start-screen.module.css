@@ -1,0 +1,36 @@
+.wrapper {
+  text-align: center;
+}
+
+.heading,
+.text,
+.button {
+  font-family: 'Sometype Mono', monospace;
+}
+
+.heading {
+ font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.button {
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #3D464B;
+  cursor: pointer;
+  color: antiquewhite;
+  opacity: .8;
+}
+
+.button:hover {
+  opacity: 1;
+}

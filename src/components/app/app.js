@@ -1,41 +1,78 @@
 import Header from '../header/header'
 import Main from '../main/main'
 import React, { useEffect, useReducer } from 'react'
+import Loader from '../loader/loader'
+import Error from '../error/error'
+import Question from '../question/question'
+import StartScreen from '../start-screen/start-screen'
 
 const initState = {
-  question: []
+  questions: [],
+  status: 'loading',
+  currentQuestion: 0
 }
 
-const reducer = (state = initState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case 'load':
-      return [...action.payload]
+    case 'dataReceived':
+      return {
+        ...state,
+        questions: action.payload,
+        status: 'ready'
+      }
+    case 'dataFailed':
+      return {
+        ...state,
+        status: 'error'
+      }
+    case 'start':
+      return {
+        ...state,
+        status: 'active'
+      }
+    case 'nextStep':
+      return {
+        ...state,
+        currentQuestion: state.currentQuestion + 1
+      }
     default:
       return state
   }
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer)
+  const [state, dispatch] = useReducer(reducer, initState)
 
   useEffect(() => {
     const getQuestions = async () => {
       const res = await fetch(`http://localhost:8000/questions`)
       const data = await res.json()
-      dispatch({ type: 'load', payload: data })
+
+      dispatch({ type: 'dataReceived', payload: data })
     }
 
     getQuestions()
   }, [])
 
-  console.log(state)
-
   return (
     <div className='App'>
       <Header />
+
       <Main>
-        <p>1/15</p>
-        <p>Question</p>
+        {state.status === 'loading' && <Loader />}
+        {state.status === 'error' && <Error />}
+        {state.status === 'ready' && (
+          <StartScreen
+            questionCount={state.questions.length}
+            dispatch={dispatch}
+          />
+        )}
+        {state.status === 'active' && (
+          <Question
+            question={state.questions[state.currentQuestion]}
+            dispatch={dispatch}
+          />
+        )}
       </Main>
     </div>
   )
