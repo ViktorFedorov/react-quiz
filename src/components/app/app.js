@@ -9,7 +9,8 @@ import StartScreen from '../start-screen/start-screen'
 const initState = {
   questions: [],
   status: 'loading',
-  currentQuestion: 0
+  currentQuestion: 0,
+  points: 0
 }
 
 const reducer = (state, action) => {
@@ -34,6 +35,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentQuestion: state.currentQuestion + 1
+      }
+    case 'selectOption':
+      return {
+        ...state,
+        points: state.points + action.payload
       }
     default:
       return state

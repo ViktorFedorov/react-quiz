@@ -1,6 +1,7 @@
 .button {
-  background-color: tomato;
-  border: none;
+  background-color: transparent;
+
+  border: 2px solid gray;
   margin: 5px 0;
   padding: 10px;
   border-radius: 20px;
@@ -12,4 +13,12 @@
 .button:hover {
   transform: translate(5px);
   opacity: 0.8;
+}
+
+.active {
+  background-color: aqua;
+}
+
+.wrong {
+  background-color: tomato;
 }
