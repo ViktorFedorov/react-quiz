@@ -9,3 +9,23 @@
   flex-direction: column;
   margin: 50px 0;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.next,
+.timer {
+  background: transparent;
+  padding: 10px 20px;
+  border: 2px solid gray;
+  border-radius: 20px;
+  cursor: pointer;
+  color: antiquewhite;
+  font-family: 'Sometype Mono', monospace;
+}
+
+.timer {
+
+}

@@ -3,8 +3,13 @@ import styles from './question.module.css'
 import Options from '../options/options'
 
 const Question = (props) => {
-  const { dispatch } = props
+  const { dispatch, nextButtonVisible } = props
   const { question, options, correctOption, points } = props.question
+
+  const handleClickButton = () => {
+    dispatch({ type: 'nextStep' })
+    dispatch({ type: 'disable' })
+  }
 
   return (
     <div className={styles.question}>
@@ -17,7 +22,14 @@ const Question = (props) => {
           dispatch={dispatch}
         />
       </div>
-      <button onClick={() => dispatch({ type: 'nextStep' })}>Next</button>
+      <div className={styles.footer}>
+        <p className={styles.timer}>10:99</p>
+        {nextButtonVisible && (
+          <button onClick={handleClickButton} className={styles.next}>
+            Next
+          </button>
+        )}
+      </div>
     </div>
   )
 }

@@ -10,7 +10,9 @@ const initState = {
   questions: [],
   status: 'loading',
   currentQuestion: 0,
-  points: 0
+  points: 0,
+  userAnswer: null,
+  nextButtonVisible: false
 }
 
 const reducer = (state, action) => {
@@ -40,6 +42,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         points: state.points + action.payload
+      }
+    case 'enable':
+      return {
+        ...state,
+        nextButtonVisible: true
+      }
+    case 'disable':
+      return {
+        ...state,
+        nextButtonVisible: false
       }
     default:
       return state
@@ -77,6 +89,7 @@ function App() {
           <Question
             question={state.questions[state.currentQuestion]}
             dispatch={dispatch}
+            nextButtonVisible={state.nextButtonVisible}
           />
         )}
       </Main>
